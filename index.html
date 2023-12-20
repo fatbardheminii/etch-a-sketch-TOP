@@ -1,32 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Etch-a-Sketch</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Etch-a-Sketch</h1>
     <div class="container">
-        <div id="buttons-wrapper">
-            <input type="range" min="10" max="30" value="16" id="grid-size">
-            <label for="grid-size">Grid Size</label>
-            <input type="color" id="grid-div-color">
-            <label for="grid-div-color">Pick a color</label>
-            <input type="color" name="" id="grid-div-bg-color">
-            <label for="grid-div-bg-color">Pick background color</label>
-            <input type="color" name="" id="random-color">
-            <label for="random-color">Random color</label>
-            <button id="delete-color">Delete color</button>
-            <button id="add-borders">Add borders</button>
-            <button id="delete-borders">Delete borders</button>
-            <button id="darken-color">Darken color</button>
-            <button id="lighten-color">Lighten color</button>
+      <div id="buttons-wrapper">
+        <label for="grid-size"
+          >Grid Size :
+          <p>25</p></label
+        >
+        <input type="range" min="10" max="50" value="25" id="grid-size" />
+        <div class="input-label-wrapper">
+          <label for="grid-div-color">Pick a color</label>
+          <input type="color" id="grid-div-color" />
         </div>
-        <div id="grid-wrapper"></div>
-    </div>
+        <div class="input-label-wrapper">
+          <label for="grid-div-bg-color">Pick background color</label>
+          <input type="color" name="" id="grid-div-bg-color" value="#ffffff" />
+        </div>
+        <div class="input-label-wrapper">
+          <label for="random-color">Random color</label>
+          <input type="color" name="" id="random-color" />
+        </div>
 
+        <button id="delete-color">Delete color</button>
+        <button id="add-borders">Add borders</button>
+        <button id="delete-borders">Delete borders</button>
+        <button id="darken-color">Darken color</button>
+        <button id="lighten-color">Lighten color</button>
+      </div>
+      <div id="grid-wrapper"></div>
+    </div>
+    <footer>Copyright F.Emini</footer>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
