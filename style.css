@@ -55,3 +55,8 @@ body {
     height: 80vh;
 
 }
+
+/*js*/
+.active-button {
+    background-color: red;
+}

@@ -10,11 +10,10 @@
     <h1>Etch-a-Sketch</h1>
     <div class="container">
       <div id="buttons-wrapper">
-        <label for="grid-size"
-          >Grid Size :
-          <p>25</p></label
-        >
-        <input type="range" min="10" max="50" value="25" id="grid-size" />
+        <label for="grid-size-range">
+          Grid Size : <p class="range-size">10</p>
+        </label>
+        <input type="range" min="10" max="70" value="10" id="grid-size-range" />
         <div class="input-label-wrapper">
           <label for="grid-div-color">Pick a color</label>
           <input type="color" id="grid-div-color" />
@@ -23,11 +22,8 @@
           <label for="grid-div-bg-color">Pick background color</label>
           <input type="color" name="" id="grid-div-bg-color" value="#ffffff" />
         </div>
-        <div class="input-label-wrapper">
-          <label for="random-color">Random color</label>
-          <input type="color" name="" id="random-color" />
-        </div>
-
+        <br>
+        <button id="rainbow-color">Rainbow color</button>
         <button id="delete-color">Delete color</button>
         <button id="add-borders">Add borders</button>
         <button id="delete-borders">Delete borders</button>
