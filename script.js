@@ -11,6 +11,12 @@ const lightenEffect = document.querySelector('#lighten-effect');
 const rangeSize = document.querySelector('.range-size');
 const buttons = document.querySelectorAll('button');
 
+//listener when page is loaded gridWrapper size = rangeSize.value
+window.addEventListener("load", () => {
+    fillGridArea(gridSizeRange)
+    setGridLayout(gridSizeRange);
+});
+
 // fill Area with div for etch-a-sketch
 function fillGridArea(size){
      for (let i = 0; i < size.value * size.value; i++) {
@@ -29,12 +35,6 @@ function fillGridArea(size){
 function setGridLayout(num){
     gridWrapper.style.cssText = `display:grid;grid-template-rows:repeat(${num.value},1fr);grid-template-columns:repeat(${num.value}, 1fr)`;
 }
-
-//listener when page is loaded gridWrapper size = rangeSize.value
-window.addEventListener("load", () => {
-    fillGridArea(gridSizeRange)
-    setGridLayout(gridSizeRange);
-});
 //listener when size of grid is changed
 gridSizeRange.addEventListener("change", () => {
   //innerHTML deletes all old child elements after every change !!
@@ -145,8 +145,10 @@ function setCurrentShade(newMode){
 function changeDarkness(gridItem){
     if(currentMode === 'dark'){
         gridItem.style.backgroundColor = `rgba(0,0,0,${shadeEffect += 0.1})`;
+        shadeEffect > 1 ? shadeEffect = 0 : shadeEffect;
     } else if (currentMode === 'light'){
         gridItem.style.backgroundColor = `rgba(0,0,0,${shadeEffect -= 0.1})`;
+        shadeEffect < 0 ? shadeEffect = 1 : shadeEffect;
     }
 }
 
