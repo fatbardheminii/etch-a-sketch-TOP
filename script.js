@@ -6,9 +6,10 @@ const rainbowColor = document.querySelector("#rainbow-color");
 const deleteColor = document.querySelector("#delete-color");
 const addBorders = document.querySelector("#add-borders");
 const deleteBorders = document.querySelector("#delete-borders");
-const darkenColor = document.querySelector("#darken-color");
-const lightenColor = document.querySelector('#lighten-color');
+const darkenEffect = document.querySelector("#darken-effect");
+const lightenEffect = document.querySelector('#lighten-effect');
 const rangeSize = document.querySelector('.range-size');
+const buttons = document.querySelectorAll('button');
 
 // fill Area with div for etch-a-sketch
 function fillGridArea(size){
@@ -17,8 +18,9 @@ function fillGridArea(size){
         gridItem.classList.toggle('grid-item');
         gridItem.style.cssText = `border:1px solid black;display:inline-block;background-color:${gridDivBgColor.value}`;
         gridItem.addEventListener("mouseenter", () => changeColor(gridItem));
-        deleteBorders.addEventListener("mouseup", () => toggleBorders(gridItem));
-        addBorders.addEventListener("mouseup", () => toggleBorders(gridItem));
+        gridItem.addEventListener("click", () => changeDarkness(gridItem));
+        deleteBorders.addEventListener("mousedown", () => toggleBorders(gridItem));
+        addBorders.addEventListener("mousedown", () => toggleBorders(gridItem));
         gridWrapper.appendChild(gridItem);
     }
 }
@@ -38,8 +40,8 @@ gridSizeRange.addEventListener("change", () => {
   //innerHTML deletes all old child elements after every change !!
   gridWrapper.innerHTML = "";
   rangeSize.textContent = `${gridSizeRange.value}`;
-  rainbowColor.classList.remove('active-button');
-  deleteColor.classList.remove("active-button");
+  buttons.forEach((btn) => btn.classList.remove("active-button"));
+  gridDivColor.classList.remove('active-button');
   currentMode = 'color';
   fillGridArea(gridSizeRange);
   setGridLayout(gridSizeRange);
@@ -53,16 +55,28 @@ function setCurrentMode(newMode){
 }
 //css applied to active button
 function activeButton(newMode){
-    if(currentMode === 'rainbow'){
-        rainbowColor.classList.remove('active-button');
-    } else if(currentMode === 'delete'){
-        deleteColor.classList.remove('active-button');
-    }
+    if (currentMode === "color") {
+      gridDivColor.classList.remove("active-button");
+    } else if (currentMode === "rainbow") {
+      rainbowColor.classList.remove("active-button");
+    } else if (currentMode === "delete") {
+      deleteColor.classList.remove("active-button");
+    } else if (currentMode === "dark") {
+      darkenEffect.classList.remove("active-button");
+    } else if (currentMode === "light") {
+      lightenEffect.classList.remove("active-button");
+    } 
 
-    if(newMode === 'rainbow'){
-        rainbowColor.classList.add('active-button');
-    } else if(newMode === 'delete') {
-        deleteColor.classList.add('active-button');
+    if (newMode === "color") {
+      gridDivColor.classList.add("active-button");
+    } else if (newMode === "rainbow") {
+      rainbowColor.classList.add("active-button");
+    } else if (newMode === "delete") {
+      deleteColor.classList.add("active-button");
+    } else if (newMode === "dark") {
+      darkenEffect.classList.add("active-button");
+    } else if (newMode === "light") {
+      lightenEffect.classList.add("active-button");
     }
 }
 
@@ -84,24 +98,24 @@ function changeColor(gridItem){
 rainbowColor.addEventListener("click",() => setCurrentMode('rainbow'));
 gridDivColor.addEventListener("click", () => setCurrentMode('color'));
 deleteColor.addEventListener("click", () => setCurrentMode('delete'));
-
+//add or delete borders
 let currentBorders = 'border';
 
-function setCurrentBorders(newBorderMode){
-    activeBorders(newBorderMode);
-    currentBorders = newBorderMode;
+function setCurrentBorders(newMode){
+    activeBorders(newMode);
+    currentBorders = newMode;
 }
 
-function activeBorders(newBorderMode){
+function activeBorders(newMode){
     if(currentBorders === 'border'){
         addBorders.classList.remove('active-button');
     } else if (currentBorders === 'none'){
         deleteBorders.classList.remove('active-button');
     }
 
-    if(newBorderMode === 'border'){
+    if(newMode === 'border'){
         addBorders.classList.add('active-button');
-    } else if(newBorderMode === 'none'){
+    } else if(newMode === 'none'){
         deleteBorders.classList.add('active-button');
     }
 }
@@ -116,5 +130,27 @@ function toggleBorders(gridItem){
 
 deleteBorders.addEventListener("mousedown", () => setCurrentBorders('none'));
 addBorders.addEventListener("mousedown", () => setCurrentBorders('border'));
+
+//darken or lighten gridItem
+let shadeEffect = 0;
+
+function setCurrentShade(newMode){
+    if(newMode === 'light'){
+        shadeEffect = 1;
+    }
+    activeButton(newMode);
+    currentMode = newMode;
+}
+
+function changeDarkness(gridItem){
+    if(currentMode === 'dark'){
+        gridItem.style.backgroundColor = `rgba(0,0,0,${shadeEffect += 0.1})`;
+    } else if (currentMode === 'light'){
+        gridItem.style.backgroundColor = `rgba(0,0,0,${shadeEffect -= 0.1})`;
+    }
+}
+
+darkenEffect.addEventListener("mousedown", () => setCurrentShade('dark'));
+lightenEffect.addEventListener("mousedown", () => setCurrentShade('light'));
 
 
