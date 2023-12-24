@@ -17,6 +17,8 @@ function fillGridArea(size){
         gridItem.classList.toggle('grid-item');
         gridItem.style.cssText = `border:1px solid black;display:inline-block;background-color:${gridDivBgColor.value}`;
         gridItem.addEventListener("mouseenter", () => changeColor(gridItem));
+        deleteBorders.addEventListener("mouseup", () => toggleBorders(gridItem));
+        addBorders.addEventListener("mouseup", () => toggleBorders(gridItem));
         gridWrapper.appendChild(gridItem);
     }
 }
@@ -82,5 +84,37 @@ function changeColor(gridItem){
 rainbowColor.addEventListener("click",() => setCurrentMode('rainbow'));
 gridDivColor.addEventListener("click", () => setCurrentMode('color'));
 deleteColor.addEventListener("click", () => setCurrentMode('delete'));
+
+let currentBorders = 'border';
+
+function setCurrentBorders(newBorderMode){
+    activeBorders(newBorderMode);
+    currentBorders = newBorderMode;
+}
+
+function activeBorders(newBorderMode){
+    if(currentBorders === 'border'){
+        addBorders.classList.remove('active-button');
+    } else if (currentBorders === 'none'){
+        deleteBorders.classList.remove('active-button');
+    }
+
+    if(newBorderMode === 'border'){
+        addBorders.classList.add('active-button');
+    } else if(newBorderMode === 'none'){
+        deleteBorders.classList.add('active-button');
+    }
+}
+
+function toggleBorders(gridItem){
+    if(currentBorders === 'border'){
+        gridItem.style.border = '1px solid black';
+    } else if(currentBorders === 'none'){
+        gridItem.style.border = 'none';
+    }
+}
+
+deleteBorders.addEventListener("mousedown", () => setCurrentBorders('none'));
+addBorders.addEventListener("mousedown", () => setCurrentBorders('border'));
 
 
