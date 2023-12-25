@@ -10,6 +10,23 @@ const darkenEffect = document.querySelector("#darken-effect");
 const lightenEffect = document.querySelector('#lighten-effect');
 const rangeSize = document.querySelector('.range-size');
 const buttons = document.querySelectorAll('button');
+const iconBars = document.querySelector('.icon');
+const buttonsWrapper = document.querySelector('#buttons-wrapper');
+
+//iconBars clicked displays or removes buttonsWrapper on smaller screens
+iconBars.addEventListener("click", (event) => {
+  event.stopPropagation(); // Stop the event from reaching the document.body
+  buttonsWrapper.classList.toggle("icon-clicked");
+});
+//after buttonsWrapper is opened via iconBars remove it by clicking elsewhere rather than buttonsWrapper
+document.body.addEventListener("click", (event) => {
+  //2 methods possible with contains or closest
+  //contains -- checks if clicked element 
+  //if(!buttonsWrapper.contains(event.target)) {
+  if (!event.target.closest("#buttons-wrapper")) {
+    buttonsWrapper.classList.remove("icon-clicked");
+  }
+});
 
 //listener when page is loaded gridWrapper size = rangeSize.value
 window.addEventListener("load", () => {
