@@ -5,6 +5,14 @@
     box-sizing: border-box;
 }
 
+:root {
+    --grey: #F1EFEF;
+    --light-green: #88AB8E;
+    --gold-btn: #FFD95A;
+
+    --shading: 3px 3px 8px black;
+}
+
 body {
     text-align: center;
     font-size: 24px;
@@ -13,12 +21,21 @@ body {
     grid-template-rows: 4rem 1fr 4rem;
     width: 100%;
     height: 100vh;
+    color: white;
 }
+
+header, footer {
+    background-color: var(--light-green);
+    display: grid;
+    place-items: center;
+}
+
 /*Container selectors*/
 .container {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    background-color: var(--grey);
 }
 
 /*Button-wrapper*/
@@ -31,32 +48,89 @@ body {
     align-items: center;
     justify-content: space-evenly;
     border-radius: 10px;
-    border: 2px solid black;
+    background-color: var(--light-green);
+    box-shadow: var(--shading);
 }
 
 .container > :first-child > * {
     width: 80%;
-    height: 1.5rem;
+    height: 2rem;
 }
 
-.input-label-wrapper {
-    display: grid;
-    grid-template-rows: 1.5rem 1.5rem;
-    row-gap: .33rem;
+input[type=range] {
+    margin-top: 1rem;
 }
 
-.input-label-wrapper > * {
-    width: 100%;
+#grid-div-color, #grid-div-bg-color {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+#grid-div-color:hover,
+#grid-div-bg-color:hover {
+    border:3px solid var(--gold-btn);
+    transform: scale(1.05);
+}
+
+#grid-div-color::-webkit-color-swatch-wrapper,
+#grid-div-bg-color::-webkit-color-swatch-wrapper {
+    padding: 0; /* Remove padding for WebKit browsers */
+}
+
+#grid-div-color::-webkit-color-swatch,
+#grid-div-bg-color::-webkit-color-swatch {
+    border: none;  /*Remove border for WebKit browsers */
+    border-radius: 50%; /* Set border-radius for WebKit browsers */
+}
+
+button {
+    background-color: var(--grey);
+    color: black;
+    border: none;
+    border-radius: 5px;
+    box-shadow: var(--shading);
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+button:hover {
+    border: 3px solid var(--gold-btn);
+    transform: scale(1.05);
 }
 
 /*Grid-wrapper*/
 #grid-wrapper {
     width: 800px;
     height: 80vh;
-
+    border: 1.5rem solid var(--light-green);
+    border-radius: 10px;
+    box-shadow: var(--shading);
 }
 
 /*js*/
 .active-button {
-    background-color: red;
+    background-color: var(--gold-btn);
+    text-transform: uppercase;
+    transform: scale(1.05);
+}
+
+/*footer*/
+i {
+    color: black;
+    transition: all .5s ease-out;
+    /*animation: spin .5s 3 linear;
+    animation-name: spin;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;*/
+}
+
+i:hover {
+  transform: rotate(360deg);
 }

@@ -5,24 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Etch-a-Sketch</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="images/favicon.svg" />
   </head>
   <body>
-    <h1>Etch-a-Sketch</h1>
+    <header><h1>Etch-a-Sketch</h1></header>
     <div class="container">
       <div id="buttons-wrapper">
         <label for="grid-size-range">
-          Grid Size : <p class="range-size">10</p>
+          Grid Size :
+          <p class="range-size">10</p>
         </label>
         <input type="range" min="10" max="70" value="10" id="grid-size-range" />
-        <div class="input-label-wrapper">
-          <label for="grid-div-color">Pick a color</label>
-          <input type="color" id="grid-div-color" />
-        </div>
-        <div class="input-label-wrapper">
-          <label for="grid-div-bg-color">Pick background color</label>
-          <input type="color" name="" id="grid-div-bg-color" value="#ffffff" />
-        </div>
-        <br>
+        <label for="grid-div-color">Pick color</label>
+        <input type="color" id="grid-div-color" />
+        <label for="grid-div-bg-color">Pick background</label>
+        <input type="color" name="" id="grid-div-bg-color" value="#ffffff" />
+        <br />
         <button id="rainbow-color">Rainbow color</button>
         <button id="delete-color">Delete color</button>
         <button id="add-borders">Add borders</button>
@@ -32,8 +30,21 @@
       </div>
       <div id="grid-wrapper"></div>
     </div>
-    <footer>Copyright F.Emini</footer>
+    <footer>
+      <h3>
+        Copyright ©
+        <script> document.write(new Date().getFullYear())</script>
+        F.Emini
+        <a href="https://github.com/fatbardheminii" target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </h3>
+    </footer>
 
     <script src="script.js"></script>
+    <script
+      src="https://kit.fontawesome.com/c815d48bf5.js"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

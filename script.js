@@ -155,7 +155,7 @@ function changeDarkness(gridItem){
         gridItem.style.backgroundColor = `rgba(0,0,0,${shadeEffect += 0.1})`;
         shadeEffect > 1 ? shadeEffect = 0 : shadeEffect;
     } else if (currentMode === 'light'){
-        gridItem.style.backgroundColor = `rgba(0,0,0,${shadeEffect -= 0.1})`;
+        gridItem.style.backgroundColor = `rgba(200,200,200,${shadeEffect -= 0.1})`;
         shadeEffect < 0 ? shadeEffect = 1 : shadeEffect;
     }
 }
