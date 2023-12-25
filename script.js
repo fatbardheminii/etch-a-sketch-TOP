@@ -46,8 +46,12 @@ gridSizeRange.addEventListener("change", () => {
   fillGridArea(gridSizeRange);
   setGridLayout(gridSizeRange);
 });
-
+//currentMode is used in changeColor, changeDarkness and activeButton functions-- very important!
 let currentMode = 'color';
+//Listeners change currentMode -> currentMode changes active button. 
+rainbowColor.addEventListener("click",() => setCurrentMode('rainbow'));
+gridDivColor.addEventListener("click", () => setCurrentMode('color'));
+deleteColor.addEventListener("click", () => setCurrentMode('delete'));
 //select color to be used in changeColor func
 function setCurrentMode(newMode){
     activeButton(newMode)
@@ -55,32 +59,34 @@ function setCurrentMode(newMode){
 }
 //css applied to active button
 function activeButton(newMode){
-    if (currentMode === "color") {
-      gridDivColor.classList.remove("active-button");
-    } else if (currentMode === "rainbow") {
-      rainbowColor.classList.remove("active-button");
-    } else if (currentMode === "delete") {
-      deleteColor.classList.remove("active-button");
-    } else if (currentMode === "dark") {
-      darkenEffect.classList.remove("active-button");
-    } else if (currentMode === "light") {
-      lightenEffect.classList.remove("active-button");
-    } 
-
-    if (newMode === "color") {
-      gridDivColor.classList.add("active-button");
-    } else if (newMode === "rainbow") {
-      rainbowColor.classList.add("active-button");
-    } else if (newMode === "delete") {
-      deleteColor.classList.add("active-button");
-    } else if (newMode === "dark") {
-      darkenEffect.classList.add("active-button");
-    } else if (newMode === "light") {
-      lightenEffect.classList.add("active-button");
-    }
+  //always remove active-btn class after another btn is clicked
+  if (currentMode === "color") {
+    gridDivColor.classList.remove("active-button");
+  } else if (currentMode === "rainbow") {
+    rainbowColor.classList.remove("active-button");
+  } else if (currentMode === "delete") {
+    deleteColor.classList.remove("active-button");
+  } else if (currentMode === "dark") {
+    darkenEffect.classList.remove("active-button");
+  } else if (currentMode === "light") {
+    lightenEffect.classList.remove("active-button");
+  }
+  //always add active-btn class after another btn is clicked
+  if (newMode === "color") {
+    gridDivColor.classList.add("active-button");
+  } else if (newMode === "rainbow") {
+    rainbowColor.classList.add("active-button");
+  } else if (newMode === "delete") {
+    deleteColor.classList.add("active-button");
+  } else if (newMode === "dark") {
+    darkenEffect.classList.add("active-button");
+  } else if (newMode === "light") {
+    lightenEffect.classList.add("active-button");
+  }
 }
 
 //change gridItem color
+//currentMode will be changed via listeners and function: setCurrentMode!
 function changeColor(gridItem){
     if(currentMode === 'color'){
         gridItem.style.backgroundColor = `${gridDivColor.value}`;
@@ -95,11 +101,11 @@ function changeColor(gridItem){
     
 }
 
-rainbowColor.addEventListener("click",() => setCurrentMode('rainbow'));
-gridDivColor.addEventListener("click", () => setCurrentMode('color'));
-deleteColor.addEventListener("click", () => setCurrentMode('delete'));
 //add or delete borders
 let currentBorders = 'border';
+//Listeners change currentBorders via setCurrentBorders func -> setCurrBorders func changes activeBorders func (toggles active-button class) 
+deleteBorders.addEventListener("mousedown", () => setCurrentBorders("none"));
+addBorders.addEventListener("mousedown", () => setCurrentBorders("border"));
 
 function setCurrentBorders(newMode){
     activeBorders(newMode);
@@ -119,7 +125,7 @@ function activeBorders(newMode){
         deleteBorders.classList.add('active-button');
     }
 }
-
+//add or remove borders --> called with 2 different listeners inside fillGridArea func
 function toggleBorders(gridItem){
     if(currentBorders === 'border'){
         gridItem.style.border = '1px solid black';
@@ -128,11 +134,13 @@ function toggleBorders(gridItem){
     }
 }
 
-deleteBorders.addEventListener("mousedown", () => setCurrentBorders('none'));
-addBorders.addEventListener("mousedown", () => setCurrentBorders('border'));
-
 //darken or lighten gridItem
 let shadeEffect = 0;
+//Listeners change currentMode via setCurrentShade func -> currentMode changes active button
+// if currentMode is dark or light --> changeColor func can't be active, because it needs currentMode(color,rainbow or delete)!!
+//when changeDarkness is active changeColor is inactive and vice-versa
+darkenEffect.addEventListener("mousedown", () => setCurrentShade("dark"));
+lightenEffect.addEventListener("mousedown", () => setCurrentShade("light"));
 
 function setCurrentShade(newMode){
     if(newMode === 'light'){
@@ -151,8 +159,5 @@ function changeDarkness(gridItem){
         shadeEffect < 0 ? shadeEffect = 1 : shadeEffect;
     }
 }
-
-darkenEffect.addEventListener("mousedown", () => setCurrentShade('dark'));
-lightenEffect.addEventListener("mousedown", () => setCurrentShade('light'));
 
 
