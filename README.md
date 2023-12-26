@@ -17,7 +17,7 @@ Welcome to Etch-a-Sketch, a simple drawing application built with HTML, CSS, and
 
 ## Usage
 
-1. **Live Demo:** Check out the live demo [here](https://fatbardheminii.github.io/etch-a-sketch-TOP/) (opens in a new tab/window).
+1. **Live Demo:** Check out the live demo [here](https://fatbardheminii.github.io/etch-a-sketch-TOP/)
 2. Adjust the grid size, pick your color, and start drawing!
 3. Explore special effects buttons for additional creative options.
 
